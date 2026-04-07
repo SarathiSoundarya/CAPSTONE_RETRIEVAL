@@ -47,7 +47,7 @@ access the endpoints of container
 
 streamlit - runs on 3000
 fastapi  - runs on 6000
-docker - runs on 7000
+docker - runs on port 80
 see the docker run command oin deploy.yaml
 check on 
-publicip: 7000 port
+publicip: 80 port
