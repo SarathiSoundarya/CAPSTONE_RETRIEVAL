@@ -1,0 +1,34 @@
+uvicorn main:app --reload --port 6000
+streamlit run streamlit_app.py --server.port 3000
+
+
+#Login to EC2 container and install docker
+
+1) Login to EC2
+
+ssh -i my-key.pem ubuntu@<EC2-PUBLIC-IP>
+sudo apt update
+#install docker
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+#run docker without sudo
+sudo usermod -aG docker ubuntu
+#relogin
+exit
+ssh -i my-key.pem ubuntu@<EC2-IP>
+#test docker
+docker run hello-world
+
+GitHub → GitHub Actions → Build Docker Image
+                             ↓
+                        Push / Copy
+                             ↓
+                         EC2 (Docker)
+                             ↓
+                    Run Container (FastAPI + Streamlit)
+
+
+2) ADD Secrets to your repository
+GitHub → Your Repo → Settings → Secrets and variables → Actions → New repository secret

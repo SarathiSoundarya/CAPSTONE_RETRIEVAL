@@ -1,0 +1,46 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  #Downloads your repo into the runner
+
+    - name: Copy files to EC2
+      uses: appleboy/scp-action@v0.1.7 #prebuild github action that copies the files from repo to EC2, uses scp protocol
+      with:
+        host: ${{ secrets.EC2_IP_ADDRESS }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        source: "."
+        target: "~/app"    #this copies my entire github repo to /home/ubuntu/app, app refers to ubuntu path
+
+    - name: SSH and Deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_IP_ADDRESS }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
+          cd ~/app 
+          docker stop capstoneappcontainer || true
+          docker rm capstoneappcontainer || true
+          docker build -t capstoneappimage .
+          docker run -d \
+            -p 7000:3000 \
+            -e AZURE_OPENAI_KEY=${{ secrets.AZURE_OPENAI_KEY }} \
+            -e AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }} \
+            -e AZURE_OPENAI_EMBEDDING_MODEL=${{ secrets.AZURE_OPENAI_EMBEDDING_MODEL }} \
+            -e AZURE_OPENAI_VERSION=${{ secrets.AZURE_OPENAI_VERSION }} \
+            -e SECRET_KEY=${{ SECRET_KEY }} \
+            --name capstoneappcontainer capstoneappimage
+
+        #naviget to app folder inside ubuntu, stop container named myapp, remove the container named myaapp, docker build myapp and then run the container script: |
+ 
