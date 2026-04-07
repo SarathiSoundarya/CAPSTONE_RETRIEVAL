@@ -3,7 +3,7 @@ import asyncio
 from dotenv import load_dotenv
 from llama_index.core import Document, VectorStoreIndex
 from llama_index.llms.openai import OpenAI
-from application.data import load_csv
+from data import load_csv
 import logging
 from llama_index.llms.azure_openai import AzureOpenAI
 from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding

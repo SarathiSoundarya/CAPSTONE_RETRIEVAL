@@ -6,10 +6,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
 import logging
-from application.retrieval import initialize_retrieval, execute_query
-from application.auth import (get_current_user, require_admin, create_access_token, users_db)
-from application.models import (LoginRequest, QueryRequest, QueryResponse, HealthResponse, DashBoardResponse, TokenResponse, HistoryResponse)
-from application.analytics import (track_request, cache_query, get_cached_query, get_user_history, get_analytics_summary)
+from retrieval import initialize_retrieval, execute_query
+from auth import (get_current_user, require_admin, create_access_token, users_db)
+from models import (LoginRequest, QueryRequest, QueryResponse, HealthResponse, DashBoardResponse, TokenResponse, HistoryResponse)
+from analytics import (track_request, cache_query, get_cached_query, get_user_history, get_analytics_summary)
 import traceback
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("capstone_main")

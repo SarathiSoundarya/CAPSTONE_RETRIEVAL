@@ -44,3 +44,10 @@ access the endpoints of container
 3) docker ps -a #lists all the containers
 4) docker logs 874207ee043e (or logs -f)
 5) docker rm 874207ee043e
+
+streamlit - runs on 3000
+fastapi  - runs on 6000
+docker - runs on 7000
+see the docker run command oin deploy.yaml
+check on 
+publicip: 7000 port
