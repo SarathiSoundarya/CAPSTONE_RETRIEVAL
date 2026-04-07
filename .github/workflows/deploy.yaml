@@ -34,7 +34,7 @@ jobs:
           docker rm capstoneappcontainer || true
           docker build -t capstoneappimage .
           docker run -d \
-            -p 7000:3000 \
+            -p 80:3000 \
             -e AZURE_OPENAI_KEY=${{ secrets.AZURE_OPENAI_KEY }} \
             -e AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }} \
             -e AZURE_OPENAI_EMBEDDING_MODEL=${{ secrets.AZURE_OPENAI_EMBEDDING_MODEL }} \
