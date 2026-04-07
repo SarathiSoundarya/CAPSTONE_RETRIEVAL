@@ -10,3 +10,4 @@ python-multipart==0.0.22
 llama-index==0.14.20
 llama-index-llms-azure-openai==0.5.3
 llama-index-embeddings-azure-openai==0.5.2
+streamlit==1.56.0

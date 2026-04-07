@@ -4,7 +4,7 @@ streamlit run streamlit_app.py --server.port 3000
 
 #Login to EC2 container and install docker
 
-1) Login to EC2
+1) Login to EC2 and install docker
 
 ssh -i my-key.pem ubuntu@<EC2-PUBLIC-IP>
 sudo apt update
@@ -32,3 +32,15 @@ GitHub → GitHub Actions → Build Docker Image
 
 2) ADD Secrets to your repository
 GitHub → Your Repo → Settings → Secrets and variables → Actions → New repository secret
+
+3) add the deploy.yaml file and push the code to repo, monitor github actions for any errors.
+if pipeline runs sucessfully, then login to ec2 and docker ps -a to check if container run was sucessful or not.
+
+Docker commands:
+1) docker build -t fastapi-app .
+# docker port: 80 and local machine port 6000
+2) docker run -d -p 80:6000 --env-file .env fastapi-app
+access the endpoints of container
+3) docker ps -a #lists all the containers
+4) docker logs 874207ee043e (or logs -f)
+5) docker rm 874207ee043e
