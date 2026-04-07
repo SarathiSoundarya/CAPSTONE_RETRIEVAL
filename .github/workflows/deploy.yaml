@@ -39,7 +39,7 @@ jobs:
             -e AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }} \
             -e AZURE_OPENAI_EMBEDDING_MODEL=${{ secrets.AZURE_OPENAI_EMBEDDING_MODEL }} \
             -e AZURE_OPENAI_VERSION=${{ secrets.AZURE_OPENAI_VERSION }} \
-            -e SECRET_KEY=${{ SECRET_KEY }} \
+            -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
             --name capstoneappcontainer capstoneappimage
 
         #naviget to app folder inside ubuntu, stop container named myapp, remove the container named myaapp, docker build myapp and then run the container script: |
